@@ -5,6 +5,9 @@ import Textform from './components/TextForm';
 import About from './components/About';
 import React, { useState } from 'react';
 import Alert from './components/Alert';
+import {BrowserRouter as Router,
+        Routes,
+        Route } from "react-router-dom"
 
 function App() {
 
@@ -42,10 +45,16 @@ function App() {
 
   return (
     <>
+    <Router>
       <Navbar title='Company' mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} showAlert={showAlert} hideAlert={hideAlert}/>
-      <Textform heading='Enter Text to Analyze' mode={mode} showAlert={showAlert} />
-      <About mode={mode} />
+      
+      <Routes>
+        <Route path="/about" element={<About mode={mode} />}/>
+        <Route path="/" element={<Textform heading='Enter Text to Analyze' mode={mode} showAlert={showAlert} />}/>
+      </Routes>
+
+    </Router>
     </>
   );
 }
