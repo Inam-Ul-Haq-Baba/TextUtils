@@ -29,6 +29,7 @@ export default function Textform({
     const handleCopy = () =>{
         console.log("Copy Button was Clicked")
         navigator.clipboard.writeText(text)
+        window.getSelection().removeAllRanges();        // Deselects text
     }
     const handleExtraSpaces = () =>{
         console.log("Delete Extra Spaces Button was Clicked")
@@ -57,18 +58,18 @@ export default function Textform({
                 <textarea className={`border-2 border-orange-600 rounded-lg  text-sm w-1/2 h-full ${mode==='dark' ? 'bg-gray-500 text-white' : 'bg-white text-gray-600'}`} rows={6} onChange={handleOnChange} value={text} name="" id="myTextBox"></textarea>
             </div>
             <div className="flex justify-center gap-3 my-2">
-                <button className="bg-yellow-400 px-2 py-1 rounded-lg font-semibold" onClick={handleUpClick}>Convert to UPPERCASE</button>
-                <button className="bg-blue-400 px-2 py-1 rounded-lg font-semibold" onClick={handleCapitalize}>Capitalize</button>
-                <button className="bg-green-400 px-2 py-1 rounded-lg font-semibold" onClick={handleLowClick}>Convert to LOWERCASE</button>
-                <button className="bg-red-600 px-2 py-1 rounded-lg font-semibold" onClick={handleClear}>Clear</button>
-                <button className="bg-orange-600 px-2 py-1 rounded-lg font-semibold" onClick={handleTrim}>Trim</button>
-                <button className="bg-gray-500 px-2 py-1 rounded-lg font-semibold" onClick={handleCopy}>Copy</button>
-                <button className="bg-purple-700 px-2 py-1 rounded-lg font-semibold" onClick={handleExtraSpaces}>Delete Extra Spaces</button>
+                <button disabled={text.length===0} className="bg-yellow-400 px-2 py-1 rounded-lg font-semibold" onClick={handleUpClick}>Convert to UPPERCASE</button>
+                <button disabled={text.length===0} className="bg-blue-400 px-2 py-1 rounded-lg font-semibold" onClick={handleCapitalize}>Capitalize</button>
+                <button disabled={text.length===0}  className="bg-green-400 px-2 py-1 rounded-lg font-semibold" onClick={handleLowClick}>Convert to LOWERCASE</button>
+                <button disabled={text.length===0} className="bg-red-600 px-2 py-1 rounded-lg font-semibold" onClick={handleClear}>Clear</button>
+                <button disabled={text.length===0} className="bg-orange-600 px-2 py-1 rounded-lg font-semibold" onClick={handleTrim}>Trim</button>
+                <button disabled={text.length===0} className="bg-gray-500 px-2 py-1 rounded-lg font-semibold" onClick={handleCopy}>Copy</button>
+                <button disabled={text.length===0} className="bg-purple-700 px-2 py-1 rounded-lg font-semibold" onClick={handleExtraSpaces}>Delete Extra Spaces</button>
             </div>
             <div className="w-4/5 mx-auto text-center">
                 <h2 className={`text-2xl underline font-semibold ${mode==='dark' ? 'text-yellow-500' : 'text-blue-900'} mt-3`}>Your Text Summary</h2>
-                <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{text.split(" ").length} Words, {text.length} Characters</p>
-                <p>{0.008 * (text.split(" ").length)} Minutes Read </p>  {/* because according to google, it takes about 0.008 seconds to read a word */}
+                <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{text.split(" ").filter((element)=>{return element.length!=0}).length} Words, {text.length} Characters</p>
+                <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{0.008 * (text.split(" ").filter((element)=>{return element.length!=0}).length)} Minutes Read </p>  {/* because according to google, it takes about 0.008 seconds to read a word */}
                 <h2 className={`text-2xl underline font-semibold ${mode==='dark' ? 'text-yellow-500' : 'text-blue-900'} mt-3 `}>Preview</h2>
                 <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{text.length>0 ? text : 'Enter Some Text to Preview'}</p>
             </div>

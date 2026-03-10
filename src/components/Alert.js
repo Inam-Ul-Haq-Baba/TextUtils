@@ -4,8 +4,8 @@ export default function Alert({alert,hideAlert}) {
 
     if(!alert) return null;
     return (
-        <div>
-            <div className={`max-w-xl mx-auto bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 flex items-start justify-between ${alert ? 'block' :'hidden'}`}>
+        <div className='relative'>
+            <div className={`w-1/3 bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 flex items-start justify-between absolute right-1 ${alert ? 'block' :'hidden'}`}>
 
                 <div className="flex items-start gap-3">
 
@@ -20,12 +20,6 @@ export default function Alert({alert,hideAlert}) {
                         <p className="text-sm text-green-700">
                             {alert.message}
                         </p>
-
-                        {/* <!-- Actions --> */}
-                        <div className="mt-2 flex gap-4 text-sm font-medium">
-                            <button className="text-green-900 hover:underline">View status</button>
-                            <button className="text-green-900 hover:underline" onClick={hideAlert}>Dismiss</button>
-                        </div>
                     </div>
 
                 </div>
