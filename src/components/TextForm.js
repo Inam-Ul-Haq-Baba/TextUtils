@@ -9,30 +9,26 @@ export default function Textform({
 
 {
     const handleUpClick = () =>{
-        console.log("UpperCase Button was Clicked")
         setText(text.toUpperCase())
-        showAlert("Converted to UPPERCase","Success")
+        showAlert("Converted to UPPERCASE","Success")
     }
     const handleLowClick = () =>{
-        console.log("LowerCase Button was Clicked")
         setText(text.toLowerCase())
     }
     const handleClear = () =>{
-        console.log("Clear Button was Clicked")
+
         let newText="";
         setText(newText)
     }
     const handleTrim = () =>{
-        console.log("Trim Button was Clicked")
         setText(text.trim())
     }
     const handleCopy = () =>{
-        console.log("Copy Button was Clicked")
         navigator.clipboard.writeText(text)
         window.getSelection().removeAllRanges();        // Deselects text
+        showAlert("Text Copied","Success")
     }
     const handleExtraSpaces = () =>{
-        console.log("Delete Extra Spaces Button was Clicked")
         let newText = text.split(/\s+/);
         setText(newText.join(" "));
     }
@@ -41,7 +37,7 @@ export default function Textform({
         setText(newText);
     }
     const handleOnChange = (event) =>{
-        console.log("OnChange Handeled")
+
         setText(event.target.value)
     }
 
@@ -68,7 +64,7 @@ export default function Textform({
             </div>
             <div className="w-4/5 mx-auto text-center">
                 <h2 className={`text-2xl underline font-semibold ${mode==='dark' ? 'text-yellow-500' : 'text-blue-900'} mt-3`}>Your Text Summary</h2>
-                <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{text.split(" ").filter((element)=>{return element.length!=0}).length} Words, {text.length} Characters</p>
+                <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{text.split("/\s+/").filter((element)=>{return element.length!=0}).length} Words, {text.length} Characters</p>
                 <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{0.008 * (text.split(" ").filter((element)=>{return element.length!=0}).length)} Minutes Read </p>  {/* because according to google, it takes about 0.008 seconds to read a word */}
                 <h2 className={`text-2xl underline font-semibold ${mode==='dark' ? 'text-yellow-500' : 'text-blue-900'} mt-3 `}>Preview</h2>
                 <p className={`${mode==='dark' ? 'text-white' : 'text-gray-700'} `}>{text.length>0 ? text : 'Enter Some Text to Preview'}</p>
